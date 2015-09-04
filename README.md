@@ -29,3 +29,20 @@ This simplified the implementation a lot, but have some drawbacks becuase seleni
 * add "one test per feature" style tests with before/after hooks for clearing data
 * tag smoke tests
 
+# Extra notes
+
+## Page Objects
+
+This version of the project contains all "helpers to work with page's elements" in a separate PageObject implemented
+as a simple Python module. 
+On the lesson we used all helpers just inside the python file with test itself: http://pastebin.com/VmeQ6C3B
+
+Just remember that PageObject as a template is needed
+* not only
+** to gather (encapsulate) things of one context ("elements and action/helper/step-methods to work with a specific page")
+* but
+** mainly for code reuse
+** i.e.
+*** if so far you use all these helpers only in one file, there is no actual need to move them into separate one;)
+**** some companies do not use PageObject pattern because structure their tests in the way that these helpers are used only in one file
+**** though this is of course not a general recommended principle. Everything should be applied in context.
