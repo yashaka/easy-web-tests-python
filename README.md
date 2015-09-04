@@ -45,6 +45,6 @@ Just remember that PageObject as a template is needed:
 
 i.e. if so far you used all these helpers only in one file, there is no actual need to move them into separate one;)
 
-Some companies do not use PageObject pattern because structure their tests in the way that these helpers are used only in one file
+Some companies do not use PageObject pattern because structure their tests in the way that these helpers are used only in one file.
 Though this is of course not a general recommended principle. Everything should be applied in context.
 Sometimes it will work, sometimes not.
