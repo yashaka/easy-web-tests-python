@@ -13,7 +13,7 @@ It differs from Selene
 * no screenshots in error messages (though can be added very easy)
 This simplified the implementation a lot, but have some drawbacks becuase selenium's expected conditions are not handy in use, limiting the possibilities.
 
-# To start writing tests
+## To start writing tests
 * install python 
 * install selenium and pytest
 * install IDE (e.g. PyCharm CE)
@@ -24,25 +24,27 @@ This simplified the implementation a lot, but have some drawbacks becuase seleni
 
 (google on installation guides for all tools)
 
-# TODOs
+## TODOs
 * add more docs and howtos on insallation and usage, etc.
 * add "one test per feature" style tests with before/after hooks for clearing data
 * tag smoke tests
 
-# Extra notes
+## Extra notes
 
-## Page Objects
+### About PageObjects
 
 This version of the project contains all "helpers to work with page's elements" in a separate PageObject implemented
 as a simple Python module. 
 On the lesson we used all helpers just inside the python file with test itself: http://pastebin.com/VmeQ6C3B
 
-Just remember that PageObject as a template is needed
-* not only
-** to gather (encapsulate) things of one context ("elements and action/helper/step-methods to work with a specific page")
-* but
-** mainly for code reuse
-** i.e.
-*** if so far you use all these helpers only in one file, there is no actual need to move them into separate one;)
-**** some companies do not use PageObject pattern because structure their tests in the way that these helpers are used only in one file
-**** though this is of course not a general recommended principle. Everything should be applied in context.
+Just remember that PageObject as a template is needed:
+
+* NOT ONLY to gather (encapsulate) things of one context ("elements and action/helper/step-methods to work with a specific page")
+
+* BUT mainly for code reuse
+
+i.e. if so far you used all these helpers only in one file, there is no actual need to move them into separate one;)
+
+Some companies do not use PageObject pattern because structure their tests in the way that these helpers are used only in one file
+Though this is of course not a general recommended principle. Everything should be applied in context.
+Sometimes it will work, sometimes not.
