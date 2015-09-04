@@ -1,9 +1,9 @@
 # Easy Selenium tests in Python demo
 
-This is a notes project for demo on how to write easy selenium tests in Python (of [Selenide](selenide.org) style). 
+This is a notes project for demo on how to write easy selenium tests in Python (of [Selenide](http://selenide.org) style). 
 Demo was shown in Cogniance, 03.09.2015
 
-This project was inspired also by [Selene](https://github.com/yashaka/selene/) which is an attempt to implement [Selenide](selenide.org) + [htmlelements](https://github.com/yandex-qatools/htmlelements) in Python.
+This project was inspired also by [Selene](https://github.com/yashaka/selene/) which is an attempt to implement [Selenide](http://selenide.org) + [htmlelements](https://github.com/yandex-qatools/htmlelements) in Python.
 
 It differs from Selene
 * by using Selenium explicit waits under the hood (Selene implements its own explicit waits)
