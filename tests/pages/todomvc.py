@@ -1,12 +1,12 @@
 from selenium.webdriver.common.keys import Keys
 
-from core.conditions import texts, css_class, visible, exact_text
+from core.conditions import texts, css_class, visible, exact_text, exact_texts
 from core.tools import s, ss
 
 tasks = ss("#todo-list>li")
 
 def assert_tasks(*task_texts):
-    tasks.assure(texts, *task_texts)
+    tasks.assure(exact_texts, *task_texts)
 
 
 def assert_visible_tasks(*task_texts):

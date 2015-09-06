@@ -1,11 +1,12 @@
-from operator import contains
+from operator import contains, eq
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 from core import config
 
 # todo: refactor conditions to accept element.finder, not element - to make implementation of conditions more secure
 
 
-class text(object):
+# this is an example of raw condition implemented from scratch
+class example_condition_contain_text(object):
     def __init__(self, element, expected_text):
         self.element = element
         self.expected_text = expected_text
@@ -40,21 +41,27 @@ class Condition(object):
             return False
 
     def __str__(self):
-        return """
+        try:
+            return """
             failed while waiting %s seconds
             for %s found by: %s
             to assert %s%s%s
         """ % (config.timeout,
                self.identity(),
-               self.element,
+               self.entity(),
                self.__class__.__name__,
                """:
-            expected: """ + self.expected() if self.expected() else "",
+            expected: """ + str(self.expected()) if self.expected() else "",
                """
-              actual: """ + self.actual() if self.actual() else "")
+              actual: """ + str(self.actual()) if self.actual() else "")
+        except Exception as e:
+            return "\n type: %s \n msg: %s \n" % (type(e), e)
 
     def identity(self):
         return "element"
+
+    def entity(self):
+        return self.element
 
     def expected(self):
         return None
@@ -71,22 +78,34 @@ class CollectionCondition(Condition):
     def identity(self):
         return "elements"
 
+    def entity(self):
+        return self.elements
 
-class exact_text(Condition):
+
+class text(Condition):
     def __init__(self, element, expected_text):
         self.element = element
         self.expected_text = expected_text
         self.actual_text = None
 
+    def compare_fn(self):
+        return contains
+
     def apply(self):
         self.actual_text = self.element.finder().text
-        return self.expected_text == self.actual_text
+        # return self.expected_text in self.actual_text
+        return self.compare_fn()(self.actual_text, self.expected_text)
 
     def expected(self):
         return self.expected_text
 
     def actual(self):
         return self.actual_text
+
+
+class exact_text(text):
+    def compare_fn(self):
+        return eq
 
 
 class visible(Condition):
@@ -127,10 +146,13 @@ class texts(CollectionCondition):
         self.expected_texts = expected_texts
         self.actual_texts = None
 
+    def compare_fn(self):
+        return contains
+
     def apply(self):
         self.actual_texts = [item.text for item in self.elements]
         return len(self.elements) == len(self.expected_texts) and \
-            all(map(contains, self.actual_texts, self.expected_texts))
+            all(map(self.compare_fn(), self.actual_texts, self.expected_texts))
 
     def expected(self):
         return self.expected_texts
@@ -138,6 +160,11 @@ class texts(CollectionCondition):
     def actual(self):
         return self.actual_texts
 
+
+class exact_texts(texts):
+
+    def compare_fn(self):
+        return eq
 
 class size(CollectionCondition):
 

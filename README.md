@@ -28,6 +28,7 @@ This simplified the implementation a lot, but have some drawbacks becuase seleni
 * add more docs and howtos on insallation and usage, etc.
 * add "one test per feature" style tests with before/after hooks for clearing data
 * tag smoke tests
+* implement conditions in a simpler and smarter way
 
 ## Extra notes
 
