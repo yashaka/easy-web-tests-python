@@ -1,5 +1,5 @@
 from operator import contains
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 from core import config
 
 # todo: refactor conditions to accept element.finder, not element - to make implementation of conditions more secure
@@ -15,7 +15,7 @@ class text(object):
         try:
             self.actual_text = self.element.finder().text
             return self.expected_text in self.actual_text
-        except StaleElementReferenceException:
+        except (NoSuchElementException, StaleElementReferenceException):
             return False
 
     def __str__(self):
@@ -36,7 +36,7 @@ class Condition(object):
         self.driver = driver
         try:
             return self.apply()
-        except StaleElementReferenceException:
+        except (NoSuchElementException, StaleElementReferenceException):
             return False
 
     def __str__(self):
